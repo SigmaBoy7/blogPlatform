@@ -1,0 +1,72 @@
+.userCreate {
+  max-width: 385px;
+  margin: 0 auto;
+  margin-top: 60px;
+
+  padding: 48px 32px 48px 32px;
+  border-radius: 6px;
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.userFormTitle {
+  margin: 0;
+  margin-bottom: 21px;
+  line-height: 28px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.userForm {
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  width: 100%;
+  line-height: 24px;
+  padding: 7px 0px 7px 12px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.userFormLabel {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.userFormLabel:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.userForm:focus {
+  border: 2px solid black;
+}
+
+.formCheckbox {
+  margin-top: 21px;
+  margin-bottom: 21px;
+  padding-top: 9px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.login {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.loginText {
+  cursor: pointer;
+  text-decoration: none;
+  color: #1890ff;
+}
+
+.formError {
+  color: rgb(245, 34, 45);
+}
+
+.userFormWarning {
+  margin-bottom: 20px;
+  color: rgb(245, 34, 45);
+}

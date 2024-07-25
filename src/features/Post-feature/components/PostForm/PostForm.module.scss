@@ -1,0 +1,43 @@
+
+
+.postFormLabel {
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: 21px;
+  }
+}
+
+.postInput {
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  width: 100%;
+  line-height: 24px;
+  padding: 7px 0px 7px 12px;
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 16px;
+
+  &::placeholder {
+    color: rgb(191, 191, 191);
+  }
+
+  &__text::placeholder {
+  }
+}
+
+.postInputText {
+  min-height: 168px;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+
+.submitButton {
+  width: 312px;
+  margin-top: 21px;
+}
+
+.formError{
+  color: red;
+}

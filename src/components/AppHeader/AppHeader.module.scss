@@ -1,0 +1,139 @@
+.header {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  background-color: white;
+}
+
+.headerBody {
+  max-height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 12px;
+}
+
+.headerLeft {
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.headerButton {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  padding-inline: 0;
+  padding-block: 0;
+  text-decoration: none;
+  background-color: white;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.headerButtonUser {
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+}
+
+.headerButtonUser:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 32px;
+  color: #52c41a;
+  border: 1px solid #52c41a;
+  border-radius: 5px;
+}
+
+.headerButtonUser:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 41px;
+  width: 89px;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+}
+
+.userButton {
+  display: flex;
+  align-items: center;
+  margin: 0 27px;
+}
+
+.headerButton:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 41px;
+  width: 89px;
+  border: 1px solid #52c41a;
+  border-radius: 5px;
+  color: #52c41a;
+}
+
+.headerButton:first-child {
+  margin-right: 40px;
+  color: black;
+}
+
+.homeButton {
+  text-decoration: none;
+  color: black;
+}
+
+@media (min-width: 426px) {
+  .headerBody {
+    max-height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 22px;
+  }
+
+  .headerLeft {
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .headerButton {
+    font-size: 18px;
+  }
+
+  .header-button:last-child {
+    height: 51px;
+    width: 109px;
+  }
+
+  .headerButton:first-child:hover {
+    border-bottom: 2px solid black;
+  }
+
+  .headerButton-user:last-child:hover {
+    transition-duration: 0.3s;
+    color: white;
+    background-color: black;
+  }
+
+  .headerButton-user:first-child:hover {
+    transition-duration: 0.3s;
+    color: white;
+    background-color: #52c41a;
+  }
+
+  .headerButton:last-child:hover {
+    color: white;
+    background-color: #52c41a;
+    transition-duration: 0.3s;
+  }
+}

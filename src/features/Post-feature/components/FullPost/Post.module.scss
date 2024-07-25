@@ -1,0 +1,126 @@
+.post {
+  background-color: white;
+  padding: 22px 14px 24px 16px;
+  border-radius: 5px;
+  color: black;
+}
+
+.postSmall {
+  min-height: 140px;
+}
+
+.postFull {
+  min-height: fit-content;
+}
+
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+
+.postInfoTop {
+  display: flex;
+  align-items: center;
+}
+
+.postTitle {
+  margin-right: 13px;
+  font-size: 20px;
+  color: rgb(24, 144, 255);
+}
+
+.postLikes {
+  display: flex;
+  font-size: 12px;
+}
+
+.postLikes::before {
+  content: url('../assets/heart\ 1.svg');
+  margin-right: 5px;
+}
+
+.postTags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.postTag {
+  min-width: fit-content;
+  padding: 2px 6px 3px 5px;
+  margin-top: 8px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.postTag:not(:last-child) {
+  margin-right: 8px;
+}
+
+.postOwnerInfo {
+  display: flex;
+  text-align: right;
+}
+
+.postOwner {
+  font-size: 18px;
+  margin-bottom: 9px;
+}
+
+.postCreationDate {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.postOwnerImg {
+  border-radius: 360px;
+  margin-left: 12px;
+}
+
+.postDescription {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.postButton {
+  cursor: pointer;
+  padding: 6px 17px;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  &:first-child {
+    color: #f5222d;
+    border: 1px solid #f5222d;
+  }
+
+  &:first-child:hover {
+    color: white;
+    background-color: #f5222d;
+    transition-duration: 0.3s;
+  }
+
+  &:last-child {
+    color: #52c41a;
+    border: 1px solid #52c41a;
+  }
+
+  &:last-child:hover {
+    color: white;
+    background-color: #52c41a;
+    transition-duration: 0.3s;
+  }
+}
+
+.postMarkdown {
+  margin-top: 25px;
+}
