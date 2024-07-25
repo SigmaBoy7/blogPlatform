@@ -31,8 +31,25 @@
 }
 
 .postLikes {
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
   display: flex;
   font-size: 12px;
+}
+
+.postLiked{
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  display: flex;
+  font-size: 12px;
+}
+
+
+.postLiked::before{
+  content: url('../../assets/likeActive.svg');
+  margin-right: 5px;
 }
 
 .postLikes::before {

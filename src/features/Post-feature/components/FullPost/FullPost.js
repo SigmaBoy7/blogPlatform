@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import ReactMarkdown from 'react-markdown';
 import { Popconfirm } from 'antd';
 
-import { getArticle, deleteArticle } from '../../api/api';
+import { getArticle, deleteArticle, addFavorite, deleteFavorite } from '../../api/api';
 
 import styles from './Post.module.scss';
 
@@ -20,6 +20,15 @@ export default function FullPost() {
   async function handleDelete() {
     await deleteArticle(article.slug);
     navigate('/');
+  }
+
+  async function handleLikeClick() {
+    if (article.favorited) {
+      await deleteFavorite(article.slug);
+      return navigate(0);
+    }
+    await addFavorite(article.slug);
+    navigate(0);
   }
 
   const postOwnerImg = (
@@ -58,7 +67,9 @@ export default function FullPost() {
             <div className={styles.postInfo}>
               <div className={styles.postInfoTop}>
                 <div className={styles.postTitle}>{article.title.trim() !== '' ? article.title : 'Нет тайтла'}</div>
-                <div className={styles.postLikes}>{article.favoritesCount}</div>
+                <button onClick={handleLikeClick} className={article.favorited ? styles.postLiked : styles.postLikes}>
+                  {article.favoritesCount}
+                </button>
               </div>
               <div className={styles.postTags}>
                 {article.tagList.map((item) => {
