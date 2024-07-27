@@ -19,15 +19,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<AppLayout />} errorElement={<AppRouteErrorPage />}>
       <Route index element={<PostList />} />
-      <Route
-        path="/posts/:slug"
-        element={
-          <RequireAuth>
-            <FullPost />
-          </RequireAuth>
-        }
-        loader={articleLoader}
-      />
+      <Route path="/posts/:slug" element={<FullPost />} loader={articleLoader} />
       <Route
         path="/profile"
         element={

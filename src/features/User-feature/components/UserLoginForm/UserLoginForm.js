@@ -34,7 +34,7 @@ export default function UserLoginForm() {
   };
 
   const loginFaildWarning = isLoginFaild ? (
-    <div className={styles.userFormWarning}>Пользователя с такими данными не существует!</div>
+    <div className={styles.userFormWarning}>Введены неверные адрес или пароль!</div>
   ) : null;
 
   return (
@@ -54,7 +54,7 @@ export default function UserLoginForm() {
             type="email"
             placeholder="Email address"
           ></input>
-          <p className={styles.formError}>{errors.password?.message ? errors.password?.message : null}</p>
+          <p className={styles.formError}>{errors.email?.message ? errors.email?.message : null}</p>
         </label>
 
         <label className={styles.userFormLabel} htmlFor="password">
@@ -63,14 +63,6 @@ export default function UserLoginForm() {
             autoComplete="true"
             {...register('password', {
               required: 'Это поле обязательна для заполнения',
-              maxLength: {
-                value: 40,
-                message: 'Максимальная длинна пароля 40 символов',
-              },
-              minLength: {
-                value: 6,
-                message: 'Минимальная длинна пароля 6 сивола',
-              },
             })}
             id="password"
             className={styles.userForm}

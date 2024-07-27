@@ -1,5 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { v4 as uuid4 } from 'uuid';
 
@@ -8,20 +7,33 @@ import { addFavorite, deleteFavorite } from '../../api/posts';
 import styles from './Post.module.scss';
 
 export default function Post({ data }) {
-  const navigate = useNavigate();
-
+  const [post, setPost] = useState(data);
   async function handleLikeClick(e) {
     e.preventDefault();
-    if (data.favorited) {
-      await deleteFavorite(data.slug);
-      return navigate(0);
+    if (post.favorited) {
+      setPost((prevData) => {
+        const newLikesCount = prevData.favoritesCount - 1;
+        return {
+          ...prevData,
+          favoritesCount: newLikesCount,
+          favorited: false,
+        };
+      });
+      return await deleteFavorite(post.slug);
     }
-    await addFavorite(data.slug);
-    navigate(0);
+    await addFavorite(post.slug);
+    setPost((prevData) => {
+      const newLikesCount = prevData.favoritesCount++;
+      return {
+        ...prevData,
+        favoritesCount: newLikesCount,
+        favorited: true,
+      };
+    });
   }
 
   const postOwnerImg = (
-    <img style={{ height: '46px', width: '46px' }} className={styles.postOwnerImg} src={data.author.image}></img>
+    <img style={{ height: '46px', width: '46px' }} className={styles.postOwnerImg} src={post.author.image}></img>
   );
 
   return (
@@ -30,13 +42,13 @@ export default function Post({ data }) {
         <header className={styles.postHeader}>
           <div className={styles.postInfo}>
             <div className={styles.postInfoTop}>
-              <div className={styles.postTitle}>{data.title.trim() !== '' ? data.title : 'Нет тайтла'}</div>
-              <button onClick={handleLikeClick} className={data.favorited ? styles.postLiked : styles.postLikes}>
-                {data.favoritesCount}
+              <div className={styles.postTitle}>{post.title.trim() !== '' ? post.title : 'Нет тайтла'}</div>
+              <button onClick={handleLikeClick} className={post.favorited ? styles.postLiked : styles.postLikes}>
+                {post.favoritesCount}
               </button>{' '}
             </div>
             <div className={styles.postTags}>
-              {data.tagList.map((item) => {
+              {post.tagList.map((item) => {
                 if (item && item.trim() !== '') {
                   return (
                     <div className={styles.postTag} key={uuid4()}>
@@ -49,13 +61,13 @@ export default function Post({ data }) {
           </div>
           <div className={styles.postOwnerInfo}>
             <div className={styles.postOwnerName}>
-              <div className={styles.postOwner}>{data.author.username}</div>
-              <div className={styles.postCreationDate}>{format(new Date(data.createdAt), 'MMMM dd, yyyy')}</div>
+              <div className={styles.postOwner}>{post.author.username}</div>
+              <div className={styles.postCreationDate}>{format(new Date(post.createdAt), 'MMMM dd, yyyy')}</div>
             </div>
             {postOwnerImg}
           </div>
         </header>
-        <div className={styles.postDescription}>{data.description}</div>
+        <div className={styles.postDescription}>{post.description}</div>
       </div>
     </article>
   );

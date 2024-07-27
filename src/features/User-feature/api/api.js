@@ -1,3 +1,4 @@
+import { userDataIsAlreadyTaken } from '../errors/errors';
 const URS_BASE = 'https://blog.kata.academy/api';
 
 export async function createUser(data) {
@@ -12,7 +13,10 @@ export async function createUser(data) {
     });
 
     if (request.status === 422) {
-      throw new Error();
+      const info = await request.json();
+      const inValidUserInputs = Object.keys(info.errors);
+      const message = `${inValidUserInputs.length > 1 ? 'Поля' : 'Полe'} ${inValidUserInputs.join(',')} уже ${inValidUserInputs.length > 1 ? 'заняты' : 'занято'}`;
+      throw new userDataIsAlreadyTaken(message, inValidUserInputs);
     }
 
     if (!request.ok) {
@@ -21,7 +25,10 @@ export async function createUser(data) {
     const response = await request.json();
     return response;
   } catch (err) {
-    throw new Error(err);
+    if (err instanceof userDataIsAlreadyTaken) {
+      throw err;
+    }
+    throw err;
   }
 }
 

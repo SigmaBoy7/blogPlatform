@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Checkbox, Button } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { userDataIsAlreadyTaken } from '../../errors/errors';
 import { createUser } from '../../api/api';
 
 import styles from './UserCreateForm.module.scss';
@@ -17,6 +18,7 @@ export default function UserCreateForm() {
   const navigate = useNavigate();
   const [isUserExist, setIsUserExist] = useState(false);
   const [createError, setCreateError] = useState(false);
+  const [errorText, setErrorText] = useState('');
 
   function toLogin() {
     navigate('/sign-in');
@@ -26,14 +28,15 @@ export default function UserCreateForm() {
     async function fetchCreateUser() {
       try {
         const user = await createUser(data);
-        if (!user) {
-          setIsUserExist(() => true);
-        } else {
-          const token = user.token;
-          localStorage.setItem('login', token);
-          return toLogin();
-        }
+
+        const token = user.token;
+        localStorage.setItem('login', token);
+        return toLogin();
       } catch (err) {
+        if (err instanceof userDataIsAlreadyTaken) {
+          setIsUserExist(() => true);
+          return setErrorText(() => err.message);
+        }
         setCreateError(() => true);
       }
     }
@@ -41,9 +44,7 @@ export default function UserCreateForm() {
     fetchCreateUser();
   };
 
-  const userExistWarning = isUserExist ? (
-    <div className={styles.userFormWarning}>Пользователь с такми email или username уже существует !</div>
-  ) : null;
+  const userExistWarning = isUserExist ? <div className={styles.userFormWarning}>{errorText}</div> : null;
   const createErrorWarning = createError ? (
     <div className={styles.userFormWarning}>Непредвиденная ошибка! Повторите позднее</div>
   ) : null;

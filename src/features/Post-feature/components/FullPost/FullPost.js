@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData, Link, useNavigate } from 'react-router-dom';
 import { v4 as uuid4 } from 'uuid';
 import { format } from 'date-fns';
@@ -6,13 +6,14 @@ import ReactMarkdown from 'react-markdown';
 import { Popconfirm } from 'antd';
 
 import { getArticle, deleteArticle, addFavorite, deleteFavorite } from '../../api/api';
+import { UserAuthContext } from '../../../../context/UserContext';
 
 import styles from './Post.module.scss';
 
 export default function FullPost() {
   const article = useLoaderData().article;
+  const context = useContext(UserAuthContext);
   const navigate = useNavigate();
-
   if (!article) {
     return <div>Такого поста нету</div>;
   }
@@ -40,24 +41,25 @@ export default function FullPost() {
   );
 
   const postBody = <ReactMarkdown>{article.body}</ReactMarkdown>;
-  const postsButton = (
-    <div className={styles.postButtons}>
-      <Popconfirm
-        title="Delete the task"
-        description="Are you sure to delete this task?"
-        onConfirm={handleDelete}
-        okText="Yes"
-        cancelText="No"
-      >
-        <button to={'/'} className={styles.postButton}>
-          Delete
-        </button>
-      </Popconfirm>
-      <Link to={`/articles/${article.slug}/edit`} state={article} className={styles.postButton}>
-        Edit
-      </Link>
-    </div>
-  );
+  const postsButton =
+    context.user && context.user.username === article.author.username ? (
+      <div className={styles.postButtons}>
+        <Popconfirm
+          title="Delete the task"
+          description="Are you sure to delete this task?"
+          onConfirm={handleDelete}
+          okText="Yes"
+          cancelText="No"
+        >
+          <button to={'/'} className={styles.postButton}>
+            Delete
+          </button>
+        </Popconfirm>
+        <Link to={`/articles/${article.slug}/edit`} state={article} className={styles.postButton}>
+          Edit
+        </Link>
+      </div>
+    ) : null;
 
   return article ? (
     <div className="full-post-page" style={{ paddingTop: '26px' }}>
